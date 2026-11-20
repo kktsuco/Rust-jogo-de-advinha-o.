@@ -30,18 +30,30 @@ loop {
 
     tentativas += 1;
 
+    let distancia = palpite.abs_diff(numero_secreto);
+        
     match palpite.cmp(&numero_secreto) {
-    
-        Ordering::Less => println!("Muito Baixo!"),
-        Ordering::Greater => println!("Muito Alto!"),
-        Ordering::Equal => {
-            println!("Você Acertou em {} tentativas!", tentativas);
-
-            break;
+        Ordering::Less => {
+            if distancia <= 5 {
+                println!("Muito baixo, mas tá pegando fogo!");
+            } else {
+                println!("Muito baixo!");
             }
-            
         }
+        Ordering::Greater =>{
+            if distancia <= 5{
+                println!("Muito alto, mas tá pegando fogo!");
+            } else {
+                println!("Muito alto!")
+            }
+        }
+        Ordering::Equal => {
+            println!("Você acertou em {} tentativas!", tentativas);
+            break;
+        }
+    }
 
+  
         if tentativas >= 5 {
             println!("Game over! o número secreto era {}", numero_secreto);
             break;
